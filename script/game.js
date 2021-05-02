@@ -47,41 +47,36 @@ var apiecesB = [
  "images/q2.png","images/b2.png","images/h2.png","images/r2.png",
 ];
 
+function initialPieces(place , sepSource) {
+
+	var box = document.getElementsByClassName(place)
+	var cImg = document.createElement("img");
+	cImg.setAttribute("src",sepSource);
+	cImg.setAttribute("pAwhite",false);
+	cImg.classList.add("piece");
+	box[0].appendChild(cImg);
+}
 for (var r = 1; r < 9; r++) {
 	if (r === 1) {
 		for (var c = 1; c < 9; c++) {
-		 	initialWS = document.getElementsByClassName(`row-1 col-${c}`)
- 			var pieceWS = document.createElement("img");
-			pieceWS.setAttribute("src",`${apiecesW[c-1]}`);
-			initialWS[0].appendChild(pieceWS);
+			initialPieces(`row-1 col-${c}`,`${apiecesW[c-1]}`)
 		}
 	}
 	else if (r === 7){
 		for (var c = 1; c < 9; c++) {
-		 	initialBS = document.getElementsByClassName(`row-8 col-${c}`)
- 			var pieceBS = document.createElement("img");
-			pieceBS.setAttribute("src",`${apiecesB[c-1]}`);
-			initialBS[0].appendChild(pieceBS);
+			initialPieces(`row-8 col-${c}`,`${apiecesB[c-1]}`)
 		}
 	}
 	else if (r === 2){
 		for (var c = 1; c < 9; c++) {
-		 	initialPS = document.getElementsByClassName(`row-2 col-${c}`)
-			var piecePS = document.createElement("img");
-			piecePS.setAttribute("src",`images/p1.png`);
-			initialPS[0].appendChild(piecePS);
+			initialPieces(`row-2 col-${c}`,`images/p1.png`)
 		}
-
 	}
 	else if (r === 8){
 		for (var c = 1; c < 9; c++) {
-		 	initialPSB = document.getElementsByClassName(`row-7 col-${c}`)
- 			var piecePSB = document.createElement("img");
-			piecePSB.setAttribute("src",`images/p2.png`);
-			initialPSB[0].appendChild(piecePSB);
+			initialPieces(`row-7 col-${c}`,`images/p2.png`)
 		}
 	}
-		
 }
 
 })();
@@ -93,6 +88,7 @@ for (var r = 1; r < 9; r++) {
 			var oOitem = document.getElementsByClassName(`row-${r} col-${c}`);
 			var rank = document.createElement("span");
 			rank.setAttribute("class","cR");
+			rank.setAttribute("pAwhite",false);
 			var contentSpan =document.createTextNode(`${columnIt[c-1]}`);
 			rank.appendChild(contentSpan);
 			oOitem[0].appendChild(rank);
@@ -106,6 +102,7 @@ for (var r = 1; r < 9; r++) {
 			var oOitem = document.getElementsByClassName(`row-${r} col-${c}`);
 			var rank = document.createElement("span");
 			rank.setAttribute("class","rR");
+			rank.setAttribute("pAwhite",false);
 			var contentSpan =document.createTextNode(`${r}`);
 			rank.appendChild(contentSpan);
 			oOitem[0].appendChild(rank);
@@ -113,93 +110,26 @@ for (var r = 1; r < 9; r++) {
 	}
 })();
 
-(function () {
-	var outter = document.getElementsByClassName("container")
-	var holder = [];
-	outter[0].addEventListener('mousedown',hamada );
-	function hamada(e) {
-		var lala = e.target.nodeName;
-		console.log(lala);
-		if (lala === "IMG") {
-			console.log (e.target.parentNode.classList)
-			var locat = e.target.parentNode.classList.value;
-			console.log(locat)
-
-			var opeOn = document.getElementsByClassName(locat);
-			console.log(opeOn)
-			
-			var inOpeOn = opeOn[0].firstChild;
-			console.log(inOpeOn)
-			holder.push(inOpeOn)
-			outter[0].addEventListener('mouseup', haga );
-		}		
-		function haga(e) {
-			var man = e.target.nodeName;
-			if (man === "IMG") {
-				console.log (e.target.parentNode.classList)
-				var locat = e.target.parentNode.classList.value;
-				console.log(locat)
-
-				var opeOn = document.getElementsByClassName(locat);
-				console.log(opeOn);
-				
-				var inOpeOn = opeOn[0].firstChild;
-				console.log(inOpeOn)
-				opeOn[0].removeChild(inOpeOn);
-				opeOn[0].appendChild(holder[0]);
-				holder.splice(0,1);
-				outter[0].removeEventListener('mouseup', haga );
-			}
-			else if(man === "DIV"){
-				var locat = e.target.classList.value;
-				console.log(locat)
-				var opeOn = document.getElementsByClassName(locat);
-				opeOn[0].appendChild(holder[0]);
-				holder.splice(0,1);
-				outter[0].removeEventListener('mouseup', haga );
-			}		
-		}
-	}
-})();
-
-
-
-
 //make sure to try using query selectors for 
 //the next two functions and see if it will make 
 //the code easier?????
 
 
 
-//starting the game as white
-function resetAsWhite() {
+//change the view
+function resetAs(condition) {
+	//set the condition to true to get white view
+	//set the condition to false to get the black view
+		var outter = document.getElementsByClassName(`container`)
 		
-		resettingWC = document.getElementsByClassName(`container`)
-		if (resettingWC[0].classList.contains("asBlack")) {
-		resettingWC[0].classList.remove("asBlack")
-		}
-		resettingW = document.getElementsByClassName(`item`)
-		for (var i = 0 ; i < resettingW.length ; i++) {
-			cilderens = resettingW[i].children
-			for (var c = 0 ; c < cilderens.length ;c++){
-				if (cilderens[c].classList.contains("asBlack")) {
-					cilderens[c].classList.remove("asBlack")
-				}
-			}
-		}
-}
-//starting the game as black
-function resetAsBlack() {
-		resettingBC = document.getElementsByClassName(`container`)
-		if (!(resettingBC[0].classList.contains("asBlack"))) {
-		resettingBC[0].classList.add("asBlack")
-		}
-		resettingB = document.getElementsByClassName(`item`)
-		for (var i = 0 ; i < resettingB.length ; i++) {
-			cilderens = resettingB[i].children
-			for (var c = 0 ; c < cilderens.length ;c++){
-				if (!(cilderens[c].classList.contains("asBlack"))) {
-					cilderens[c].classList.add("asBlack")
+		outter[0].setAttribute("pAWhite",condition)
+		
+		var box = outter[0].children;
+		for (var i = 0 ; i < box.length ; i++) {
+			var applyOn = box[i].children;
+			for (var c = 0; c < applyOn.length; c++) {
+				if (applyOn[c].hasAttribute("pAWhite")) {
+					applyOn[c].setAttribute("pAWhite",condition)
 				}
 			}
 		}
@@ -208,35 +138,6 @@ function resetAsBlack() {
 
 
 
-//getting the width of the item should run 
-//when the page loads and when resizing the browser
-// add the (resize) event
-function getwidth (){
-		var item = document.getElementsByClassName(`row-1 col-1`);
-		var obj = item[0].getBoundingClientRect();
-		var itemWidth = obj.width
-		return itemWidth;
-};
-var unit = getwidth();
-var disCol = [0,unit,(2*unit),(3*unit),(4*unit),(5*unit)
-				,(6*unit),(7*unit),(8*unit),(9*unit)]
-
-var disRow = [0,unit,(2*unit),(3*unit),(4*unit),(5*unit)
-				,(6*unit),(7*unit),(8*unit),(9*unit)]
-
-
-//getting which box did the pointer click on 
-//takes the clientX and clientY of the pointer onMouseDown
-//or onMouseUp
-function loacate (x,y){
-disCol.push(x);
-disRowow.push(y);
-disCol.sort();
-disRow.sort();
-var col = disCol.indexOf(x);
-var row = disRow.indexOf(y);
-return col ,row ;	
-}
 
 
 
@@ -423,3 +324,82 @@ return col ,row ;
 	// 	initialBo2[0].appendChild(pieceBo2);
 
 	// }
+
+// this function is for moveing pieces without using drag events
+
+
+// (function () {
+// 	var outter = document.getElementsByClassName("container")
+// 	var holder = [];
+// 	outter[0].addEventListener('mousedown',hamada );
+// 	function hamada(e) {
+// 		if (e.target.classList.contains("piece")) {
+// 			// console.log (e.target.parentNode.classList)
+// 			var locat = e.target.parentNode.classList;
+// 			// console.log(locat)
+
+
+// 			var opeOn = e.target;
+			
+
+			
+
+// 			holder.push(opeOn)
+// 			outter[0].removeEventListener('mousedown', hamada );
+// 			outter[0].addEventListener('mouseup', haga );
+
+
+		
+// 		}	
+// 	}	
+// 	function haga(e) {
+// 		if (e.target.classList.contains("piece")) {
+// 			// console.log (e.target.parentNode.classList)
+// 			var locat = e.target.parentNode.classList.value;
+// 			// console.log(locat)
+
+// 			var opeOn = document.getElementsByClassName(locat);
+// 			// console.log(opeOn);
+			
+// 			var inOpeOn = e.target;
+// 			// console.log(inOpeOn)
+// 			opeOn[0].removeChild(inOpeOn);
+// 			opeOn[0].appendChild(holder[0]);
+// 			holder.splice(0,1);
+// 			outter[0].removeEventListener('mouseup', haga );
+// 			outter[0].addEventListener('mousedown',hamada );
+// 			if(outter[0].classList.contains("asBlack")){
+// 				resetAsBlack();
+
+// 			}
+// 			else{
+// 			resetAsWhite();
+				
+// 			}
+// 		}
+		
+// 		else if(e.target.classList.contains("item")){
+// 			var locat = e.target.classList.value;
+// 			// console.log(locat)
+// 			var opeOn = document.getElementsByClassName(locat);
+// 			opeOn[0].appendChild(holder[0]);
+// 			holder.splice(0,1);
+// 			outter[0].removeEventListener('mouseup', haga );
+// 			outter[0].addEventListener('mousedown',hamada );
+// 			if(outter[0].classList.contains("asBlack")){
+// 				resetAsBlack();
+
+// 			}
+// 			else{
+// 			resetAsWhite();
+				
+// 			}
+
+// 		}		
+	
+// 	}
+
+// })();
+
+
+

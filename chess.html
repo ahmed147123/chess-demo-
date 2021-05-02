@@ -14,25 +14,32 @@
                   <a href=""><span>profile</span></a>
                   <a href=""><span>Others</span></a>
             </div>
+            <div class="slider">
+                  <div class="slid_content">
+                        <img class="slider_item" src="images/slider1.jpg" slidNum="2">
+                        <img class="slider_item" src="images/slider2.jpg" slidNum="3">
+                        <img class="slider_item" src="images/slider3.jpg" slidNum="4">
+                        <img class="slider_item" src="images/slider4.jpg" slidNum="1">
+                        <img class="slider_item" src="images/slider5.jpg" slidNum="5">
+                  </div>
+                  <div class="go_left">❮</div>
+                  <div class="go_right">❯</div>
+
+                  <div class="nav_slid"></div>
+                  
+            </div>
+
             <div class="lside"></div>
             <div class="home">
-                  <div class="slider">
-                        <div class="slid_content">
-                              <img class="slider_item" src="images/slider1.jpg">
-                              <img class="slider_item" src="images/slider2.jpg">
-                              <img class="slider_item" src="images/slider3.jpg">
-                              <img class="slider_item" src="images/slider4.jpg">
-                              <img class="slider_item" src="images/slider5.jpg">
-                              <div class="go_left">❮</div>
-                              <div class="go_right">❯</div>
-                        </div>
-                        <div class="nav_slid"></div>
-                        
+                  <div class="test">
+                        <div class="div1 dropzone"><img draggable="true" src="images/k2.png"></div>
+                        <div class="div2 dropzone"></div>
                   </div>
+
                   <div class="game"> 
                         <div class="settings">
-                              <button class="pointer" onclick="resetAsWhite()"><h1>New game as white</h1></button>
-                              <button class="pointer" onclick="resetAsBlack()"><h1>New game as black</h1></button>
+                              <button class="pointer" onclick="resetAs(false)"><h1>New game as black</h1></button>
+                              <button class="pointer" onclick="resetAs(true)"><h1>New game as white</h1></button>
                         </div>
                         <div class="board">
                               <div class="container pointer">
